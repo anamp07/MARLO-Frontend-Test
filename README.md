@@ -56,3 +56,8 @@ Ensure that the elements work and display correctly in the following browsers:
 
 ## Doubts?
 Do you have in doubt related to the process? Open an issue and we'll be happy to help.
+
+## Nota: 
+1. La función de guardar no actualiza el nombre en la página, pero lo actualiza en la variable. Para visualizarlo hay información que se muestra en la consola. 
+2. En el contenedor donde se muestran los datos, no se muestra el rol elegido ni si es usuario activo o no. 
+3. Luego de hacer clic en el botón de editar, los campos de texto se vuelven editables. 

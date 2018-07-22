@@ -1,71 +1,105 @@
-/* Función para almacenar datos */
 
 var datos = [];
 
-$(document).ready(function(){    
+$(document).ready(function () {
 
-    $('#boton-guardar').click(function(){        
-        
-        /* Capturar datos del formulario */        
+
+    $('.form_cont').hide();
+    $('#agregar').click(function () {
+        if ($('.form_cont').is(":visible")) {
+            $('.form_cont').hide();
+        } else {
+            $('.form_cont').show();
+        }
+    });
+
+     $('#boton-guardar').click(function () {
+
+        // Get form data 
         var nom = document.getElementById("nombretxt").value;
         var apel = document.getElementById("apellidotxt").value;
-        var tel = document.getElementById("telefonotxt").value;
-        var mail = document.getElementById("correotxt").value;        
-        
-        /* Guardando los datos */
+        var email = document.getElementById("correotxt").value;
+        var unom = document.getElementById("usertxt").value;
+
+        // Save 
         var json = {
             nombre: nom,
             apellido: apel,
-            telefono: tel,
-            correo: mail
+            correo: email,
+            nombreu: unom
         }
         datos.push(json);
-        console.log(datos);        
-       
-        /* Limpiar formulario */
+        console.log(datos);
+
+        // Clean form 
         document.getElementById("nombretxt").value = "";
         document.getElementById("apellidotxt").value = "";
-        document.getElementById("telefonotxt").value = "";
         document.getElementById("correotxt").value = "";
-
-        var uinfo = $('<div id="elemento'+datos.length+'"><div class="indice" id="indice">'+datos.length+'</div>'+
-        '<div class="user_list" id="user_list'+datos.length+'" title="Haga click para ampliar">'+nom+' '+apel+'</div>');
+        document.getElementById("usertxt").value = "";
         
-        var editb = $('<button class="button user_button" title="Editar usuario">'+
-            '<img src="iconos/editar.svg" height="40px">'+
-        '</button>');
-        
-        var deleteb = $('<button class="button user_button" title="Eliminar usuario" id="borrar'+datos.length+'">'+
-           '<img src="iconos/eliminar.svg" height="40px">'+
-        '</button>');
 
-        var ucont = $('<div class="contenedor" id="contenedor'+datos.length+'">'+
-        '<div class="informacion"><br><table id="table1">'+
-        '<tr>'+
-          '<td>Nombre:'+
-          '<td>Apellido:</td>'+
-        '</tr>'+
-        '<tr>'+
-        '<tr>'+
-          '<td><input class="inputedit" type="text" placeholder="'+ nom+'" id="nametxt" readonly></td>'+
-          '<td><input class="inputedit" type="text" placeholder="'+ apel+'" id="lastntxt" readonly></td>'+
-        '</tr>'+
-        '<tr>'+
-          '<td>Teléfono:'+
-          '<td>Correo:</td>'+
-        '</tr>'+
-        '<tr>'+
-          '<td><input class="inputedit" type="text" placeholder="'+ tel+'" id="phonetxt" readonly></td></td>'+
-          '<td><input class="inputedit" type="text" placeholder="'+ mail+'" id="emailtxt" readonly></td></td>'+
-        '</tr>'+
-        '</table><br>'+
-        '<br></div></div>');
+        // Index + name
+        var uinfo = $('<div id="elemento' + datos.length + '"><div class="indice" id="indice">' + datos.length + '</div>' +
+            '<div class="user_list" id="user_list' + datos.length + '" title="More info">' + nom + ' ' + apel + '</div>');
 
-        var saveb = $('<button class="button user_button" title="Guardar Cambios" id="guardar'+datos.length+'" style="margin-left:53.5%;">'+
-        '<img src="iconos/guardar.svg" height="40px">'+
-        '</button>');
+        // Edit button
+        var editb = $('<button class="button user_button" title="Edit user">' +
+            '<img src="iconos/editar.svg" height="40px">' +
+            '</button>');
 
-        deleteb.on("click", function(){
+        // Delete button
+        var deleteb = $('<button class="button user_button" title="Remove user" id="borrar' + datos.length + '">' +
+            '<img src="iconos/eliminar.svg" height="40px">' +
+            '</button>');
+
+        // Content box
+        var ucont = $('<div class="contenedor" id="contenedor' + datos.length + '">' +
+            '<div class="informacion"><br><table id="table1">' +
+            '<tr>' +
+            '<td>Name:' +
+            '<td>Lastname:</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<tr>' +
+            '<td><input class="inputedit" type="text" placeholder="' + nom + '" id="nametxt" readonly></td>' +
+            '<td><input class="inputedit" type="text" placeholder="' + apel + '" id="lastntxt" readonly></td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Mail:</td>' +
+            '<td>Username:</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td><input class="inputedit" type="text" placeholder="' + email + '" id="emailtxt" readonly></td>' +
+            '<td><input class="inputedit" type="text" placeholder="' + unom + '" id="usernametxt" readonly></td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>User role:' +
+            '<td>User active:</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>' +
+            '<input type="checkbox" name="admini" value="1">Administrator' +
+            '<br>' +
+            '<input type="checkbox" name="membe" value="2" checked>Member' +
+            '<br>' +
+            '<input type="checkbox" name="contrib" value="3">Contributor' +
+            '</td>' +
+            '<td>' +
+            '<input type="radio" name="actyes" value="1">Yes' +
+            '<br>' +
+            '<input type="radio" name="actno" value="2" checked>No' +
+            '</td>' +
+            '</tr>' +
+            '</table><br>' +
+            '<br></div></div>');
+
+        // Save button
+        var saveb = $('<button class="button user_button" title="Save" id="guardar' + datos.length + '" style="margin-left:53.5%;">' +
+            '<img src="iconos/guardar.svg" height="40px">' +
+            '</button>');
+
+        // Delete function
+        deleteb.on("click", function () {
             $(ucont).remove();
             $(editb).remove();
             $(uinfo).remove();
@@ -75,8 +109,9 @@ $(document).ready(function(){
 
         $(ucont).hide();
         $(saveb).hide();
-        uinfo.on("click", function(){
-            console.log('holis');
+        
+        // Show info
+        uinfo.on("click", function () {
             if ($(ucont).is(":visible")) {
                 $(ucont).hide();
             } else {
@@ -87,8 +122,8 @@ $(document).ready(function(){
 
         $('.inputedit').attr('readonly', true);
 
-        editb.on("click", function(){
-            console.log('jejejeje');
+        // Allow edit
+        editb.on("click", function () {
             $('.inputedit').removeAttr('readonly');
             if ($(saveb).is(":visible")) {
                 $(saveb).hide();
@@ -97,12 +132,12 @@ $(document).ready(function(){
             }
         });
 
-        saveb.on("click", function(){
-            console.log("estoy guardando");
+        // Save new info
+        saveb.on("click", function () {
             var newnom = document.getElementById("nametxt").value;
             var newapel = document.getElementById("lastntxt").value;
-            var newtel = document.getElementById("phonetxt").value;
-            var newmail = document.getElementById("emailtxt").value;
+            var newtel = document.getElementById("emailtxt").value;
+            var newmail = document.getElementById("usernametxt").value;
             var index = datos.findIndex(item => item.nombre === nom);
             console.log(index);
             datos[index].nombre = newnom;
@@ -110,79 +145,15 @@ $(document).ready(function(){
             datos[index].telefono = newtel;
             datos[index].correo = newmail;
             console.log(datos[index]);
-            var divid = "#user_list"+index;
-            console.log(divid);      
+            var divid = "#user_list" + index;
+            //Check if new info is saved
+            console.log(divid);
         });
 
-        $("body").append(uinfo, editb, deleteb, ucont, saveb, '<br><br>');
-     
-    });   
+        // Show info
+        $("body").append(uinfo, editb, deleteb, ucont, saveb);
 
-});
-
-/*$(document).ready(function(){  
-    $("#borrar1").click(function(){
-        $( "#elemento1" ).remove();
     });
-});*/
+    
 
-/* Función para mostrar datos */
-
-$(document).ready(function(){    
-    $('#boton-cargar').click(function(){     
-        var foo = [];    
-        
-        /* Obtener los datos */
-        for (let i = 0; i < datos.length; i++) {
-            var usuario = datos[i];
-            document.getElementById("nombre").innerHTML = usuario.nombre;     
-            document.getElementById("apellido").innerHTML = usuario.apellido;
-            document.getElementById("telefono").innerHTML = usuario.telefono;
-            document.getElementById("correo").innerHTML = usuario.correo;
-        }    
-        
-      /*  var foo = datos.map(function(usuario){
-            return '<li>'+usuario.nombre+' '+usuario.apellido+'</li>'
-          })
-          document.getElementById("foo").innerHTML = foo;
-          console.log(foo);*/
-        
-    });   
 });
-
-/* Función para eliminar datos */
-
-$(document).ready(function(){    
-    $('#boton-eliminar').click(function(){                
-                                                   
-        /* Eliminar los datos */
-        localStorage.removeItem("Nombre");
-        localStorage.removeItem("Apellido");
-        localStorage.removeItem("Telefono");
-        localStorage.removeItem("Correo"); 
-        
-        
-        /* Limpiar los datos */       
-        document.getElementById('nombre').innerHTML = "";
-        document.getElementById('apellido').innerHTML = "";
-        document.getElementById('telefono').innerHTML = "";
-        document.getElementById('correo').innerHTML = "";
-        
-    });   
-});
-
-
-/*$(document).ready(function(){
-        console.log('holis');
-       $(".contenedor").hide();
-
-    $('.user_list'+datos.length).click(function(){
-
-        if ($(".contenedor").is(":visible")) {
-            $(".contenedor").hide();
-        } else {
-            $(".contenedor").show();
-        }
-    });
-
-});*/

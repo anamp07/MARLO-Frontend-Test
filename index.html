@@ -18,88 +18,65 @@
 <body>
 
 
-    <div class="row" id="formulario">
+    <button class="button add_button" title="Add new user" id="agregar">
+        Add new user
+    </button><br>
+    <div class="form_cont">
+        <table id="table">
+            <tr>
+                <td>Name:
+                    <td>Lastname:</td>
+            </tr>
+            <tr>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Name" id="nombretxt">
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Lastname" id="apellidotxt">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mail:
+                        <td>Username:</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Mail" id="correotxt">
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Username" id="usertxt">
+                    </td>
+                </tr>
 
-        <div class="col">
+                <tr>
+                    <td>User role:
+                        <td>User active:</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="chrol" name="admin" value="Administrator">Administrator
+                        <br>
+                        <input type="checkbox" class="chrol" name="memb" value="Member" checked>Member
+                        <br>
+                        <input type="checkbox" class="chrol" name="contri" value="Contributor">Contributor
+                    </td>
+                    <td>
+                        <input type="radio" name="actyes" value="Yes">Yes
+                        <br>
+                        <input type="radio" name="actno" value="No" checked>No
+                    </td>
+                </tr>
 
-            <div class="list">
-
-                <label class="item">
-                    <input type="text" placeholder="Nombre" id="nombretxt">
-                </label>
-
-                <label class="item">
-                    <input type="text" placeholder="Apellido" id="apellidotxt">
-                </label>
-
-                <label class="item">
-                    <input type="tel" placeholder="Telefono" id="telefonotxt">
-                </label>
-
-                <label class="item">
-                    <input type="email" placeholder="Correo" id="correotxt">
-                </label>
-
-
-                <button class="button" id="boton-guardar">
-                    Insertar
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="col">
-
-            <div class="list">
-
-                <div class="item">
-                    <label id="nombre"></label>
-                </div>
-
-                <div class="item">
-                    <label id="apellido"></label>
-                </div>
-
-                <div class="item">
-                    <label id="telefono"></label>
-                </div>
-
-                <div class="item">
-                    <label id="correo"></label>
-                </div>
-
-                <button class="button" id="boton-cargar">
-                    Cargar
-                </button>
-
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="list" id="eliminar">
-        <button class="button" id="boton-eliminar">
-            Eliminar
+        </table>
+        <button class="button add_button" title="Add user" id="boton-guardar" style="margin-left: 300px">
+            <img src="iconos/agregar.svg" height="40px">
         </button>
+        <br>
+        <br>
     </div>
-
-
-<br><br>
-<!-- <div class="elemento">
-<div class="indice">1</div>
-    <div class="user_list">Hola soy un nombre muy largo</div>
-    <button class="button user_button" title="Editar usuario">
-        <img src="iconos/editar.svg" height="40px">
-    </button>
-    <button class="button user_button" title="Eliminar usuario" id="borrar">
-        <img src="iconos/eliminar.svg" height="40px">
-    </button>
-    <div class="contenedor">jijijiji</div></div>
-<br>-->
-
+    <br>
+    <br>
 
 </body>
 
