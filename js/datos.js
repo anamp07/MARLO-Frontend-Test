@@ -10,8 +10,7 @@ $(document).ready(function(){
         var nom = document.getElementById("nombretxt").value;
         var apel = document.getElementById("apellidotxt").value;
         var tel = document.getElementById("telefonotxt").value;
-        var mail = document.getElementById("correotxt").value;
-        
+        var mail = document.getElementById("correotxt").value;        
         
         /* Guardando los datos */
         var json = {
@@ -29,48 +28,93 @@ $(document).ready(function(){
         document.getElementById("telefonotxt").value = "";
         document.getElementById("correotxt").value = "";
 
-        var el = $('<div id="elemento'+datos.length+'"><div class="indice" id="indice">'+datos.length+'</div>'+
+        var uinfo = $('<div id="elemento'+datos.length+'"><div class="indice" id="indice">'+datos.length+'</div>'+
         '<div class="user_list" id="user_list'+datos.length+'" title="Haga click para ampliar">'+nom+' '+apel+'</div>');
-        var el1 = $('<button class="button user_button" title="Editar usuario">'+
+        
+        var editb = $('<button class="button user_button" title="Editar usuario">'+
             '<img src="iconos/editar.svg" height="40px">'+
         '</button>');
-        var el3 = $('<button class="button user_button" title="Eliminar usuario" id="borrar'+datos.length+'">'+
+        
+        var deleteb = $('<button class="button user_button" title="Eliminar usuario" id="borrar'+datos.length+'">'+
            '<img src="iconos/eliminar.svg" height="40px">'+
         '</button>');
-        var el4 = $('<div class="contenedor" id="contenedor'+datos.length+'">'+"Nombre: "+nom+" Apellido: "+apel+"<br>Teléfono: "+tel+" Correo: "+mail+
-        '</div></div>'+
-        '<br><br>');
 
-       /* $("body").append('<div id="elemento'+datos.length+'"><div class="indice" id="indice">'+datos.length+'</div>'+
-        '<div class="user_list" id="user_list'+datos.length+'">'+nom+' '+apel+'</div>'+
-        '<button class="button user_button" title="Editar usuario">'+
-            '<img src="iconos/editar.svg" height="40px">'+
-        '</button>'+
-        '<button class="button user_button" title="Eliminar usuario" id="borrar'+datos.length+'">'+
-           '<img src="iconos/eliminar.svg" height="40px">'+
-        '</button>'+'<div class="contenedor" id="contenedor'+datos.length+'">'+nom+apel+tel+'</div></div>'+
-        '<br><br>');*/
+        var ucont = $('<div class="contenedor" id="contenedor'+datos.length+'">'+
+        '<div class="informacion"><br><table id="table1">'+
+        '<tr>'+
+          '<td>Nombre:'+
+          '<td>Apellido:</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<tr>'+
+          '<td><input class="inputedit" type="text" placeholder="'+ nom+'" id="nametxt" readonly></td>'+
+          '<td><input class="inputedit" type="text" placeholder="'+ apel+'" id="lastntxt" readonly></td>'+
+        '</tr>'+
+        '<tr>'+
+          '<td>Teléfono:'+
+          '<td>Correo:</td>'+
+        '</tr>'+
+        '<tr>'+
+          '<td><input class="inputedit" type="text" placeholder="'+ tel+'" id="phonetxt" readonly></td></td>'+
+          '<td><input class="inputedit" type="text" placeholder="'+ mail+'" id="emailtxt" readonly></td></td>'+
+        '</tr>'+
+        '</table><br>'+
+        '<br></div></div>');
 
-        el3.on("click", function(){
-            $(el4).remove();
-            $(el1).remove();
-            $(el).remove();
-            $(el3).remove();
+        var saveb = $('<button class="button user_button" title="Guardar Cambios" id="guardar'+datos.length+'" style="margin-left:53.5%;">'+
+        '<img src="iconos/guardar.svg" height="40px">'+
+        '</button>');
+
+        deleteb.on("click", function(){
+            $(ucont).remove();
+            $(editb).remove();
+            $(uinfo).remove();
+            $(deleteb).remove();
+            $(saveb).remove();
         });
 
-        $(el4).hide();
-        el.on("click", function(){
+        $(ucont).hide();
+        $(saveb).hide();
+        uinfo.on("click", function(){
             console.log('holis');
-            if ($(el4).is(":visible")) {
-                $(el4).hide();
+            if ($(ucont).is(":visible")) {
+                $(ucont).hide();
             } else {
-                $(el4).show();
+                $(ucont).show();
             }
 
         });
 
+        $('.inputedit').attr('readonly', true);
 
-        $("body").append(el, el1, el3, el4);
+        editb.on("click", function(){
+            console.log('jejejeje');
+            $('.inputedit').removeAttr('readonly');
+            if ($(saveb).is(":visible")) {
+                $(saveb).hide();
+            } else {
+                $(saveb).show();
+            }
+        });
+
+        saveb.on("click", function(){
+            console.log("estoy guardando");
+            var newnom = document.getElementById("nametxt").value;
+            var newapel = document.getElementById("lastntxt").value;
+            var newtel = document.getElementById("phonetxt").value;
+            var newmail = document.getElementById("emailtxt").value;
+            var index = datos.findIndex(item => item.nombre === nom);
+            console.log(index);
+            datos[index].nombre = newnom;
+            datos[index].apellido = newapel;
+            datos[index].telefono = newtel;
+            datos[index].correo = newmail;
+            console.log(datos[index]);
+            var divid = "#user_list"+index;
+            console.log(divid);      
+        });
+
+        $("body").append(uinfo, editb, deleteb, ucont, saveb, '<br><br>');
      
     });   
 
@@ -85,7 +129,7 @@ $(document).ready(function(){
 /* Función para mostrar datos */
 
 $(document).ready(function(){    
-    $('#boton-cargar').click(function(){        
+    $('#boton-cargar').click(function(){     
         var foo = [];    
         
         /* Obtener los datos */

@@ -1,3 +1,9 @@
+body{ 
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 
 .indice {
     width: 60px;
@@ -55,12 +61,30 @@
     height: 60px;
     line-height: 350%;
     cursor: pointer;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 .contenedor {
-    background-color: #931f1f;
+    background-color: #ede3e3;
     font-family: Arial;
     color: #ffffff;
     width: 541px;
     margin-top: 0.2%;
+    padding: 0.8%;
+}
+
+.informacion{
+    margin-left: 15%;
+}
+
+table, td, th {
+    border: none;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+#table1 {
+    border-collapse: separate;
+    border-spacing: 8px 4px;
 }
